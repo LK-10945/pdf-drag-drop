@@ -1,80 +1,70 @@
-# 📄 PDF Drag-and-Drop Upload App
+# Getting Started with Create React App
 
-This is a simple React application that lets users drag and drop PDF files to upload. It validates file type and size (up to 5MB) and gives visual feedback for success or errors.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### 🚀 Live Demo
-Hosted on Vercel: [https://pdf-drag-drop.vercel.app](https://pdf-drag-drop.vercel.app)
+## Available Scripts
 
----
+In the project directory, you can run:
 
-## 🧰 Features
+### `npm start`
 
-- ✅ Drag-and-drop or click-to-upload interface
-- 📄 PDF-only file type validation
-- 📏 5MB max file size enforcement
-- 🔄 Real-time success or error messages
-- ⚡ Built with React + react-dropzone
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
----
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-## 📁 Project Structure
+### `npm test`
 
-```
-pdf-drag-drop/
-├── public/
-├── src/
-│   ├── App.js
-│   ├── PDFDropZone.js
-│   └── index.js
-├── package.json
-├── README.md
-└── vercel.json (optional)
-```
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
----
+### `npm run build`
 
-## 📦 Getting Started
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### 1. Clone the repo
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-```bash
-git clone https://github.com/YOUR_USERNAME/pdf-drag-drop.git
-cd pdf-drag-drop
-```
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### 2. Install dependencies
+### `npm run eject`
 
-```bash
-npm install
-```
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-### 3. Run locally
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-```bash
-npm start
-```
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
----
+## Learn More
 
-## 🌐 Deploy to Vercel
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-1. Push your code to GitHub
-2. Go to [vercel.com](https://vercel.com) and import the repo
-3. Deploy with default settings (Create React App)
+To learn React, check out the [React documentation](https://reactjs.org/).
 
----
+### Code Splitting
 
-## 🙌 Credits
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-Built with ❤️ using:
-- [React](https://reactjs.org)
-- [react-dropzone](https://react-dropzone.js.org/)
-- [Vercel](https://vercel.com)
+### Analyzing the Bundle Size
 
----
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-## 📄 License
+### Making a Progressive Web App
 
-MIT — free for personal and commercial use.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
