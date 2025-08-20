@@ -17,7 +17,7 @@ export default function PDFDropZone() {
     setSuccess(false);
     if (rejectedFiles.length > 0 || !acceptedFiles[0]?.type.includes("pdf")) {
       setFile(null);
-      setError("❌ Please upload a valid PDF file under 5MB.");
+      setError("❌ Please upload a valid PDF file under 10MB.");
       return;
     }
     setFile(acceptedFiles[0]);
@@ -55,7 +55,7 @@ export default function PDFDropZone() {
     onDrop,
     multiple: false,
     accept: { 'application/pdf': ['.pdf'] },
-    maxSize: 5 * 1024 * 1024,
+    maxSize: 10 * 1024 * 1024,
   });
 
   return (
@@ -113,3 +113,4 @@ const dropzoneStyles = {
   marginTop: '2em',
   backgroundColor: '#f9f9f9'
 };
+
