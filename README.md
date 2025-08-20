@@ -1,83 +1,65 @@
-# 📄 PDF Drag-and-Drop Upload App
+# PDF Drag & Drop with Metadata Upload
 
-This is a simple React application that allows users to drag and drop PDF files for upload. The app enforces a 5MB file size limit and provides clear feedback on valid or invalid uploads.
+This project is a simple React-based drag-and-drop UI for uploading PDF files. After selecting a valid PDF, users are prompted to provide additional metadata which is validated before a mock upload process takes place.
 
----
+## Features
 
-## 🚀 Live Demo
+- 📄 Drag-and-drop or click-to-upload interface for PDF files.
+- ✅ File type and size validation (PDF only).
+- 📝 Metadata form with:
+  - **Document Type** (required): Choose from Transcript, Resume, Recommendation, Personal Statement, or Other.
+  - **Notes** (optional): Max 200 characters.
+- 📈 Mock upload with animated progress bar (1.2–1.6s duration).
+- 🧠 Success message includes uploaded filename and document type.
+- ♿ Fully accessible UI with proper keyboard navigation and ARIA labels.
+- 💻 Tested in the latest Chrome & Safari browsers.
 
-> Hosted on Vercel: Coming soon...
+## Getting Started
 
----
+### Local Development
 
-## 📦 Features
+1. Clone the repository and navigate into the project:
+   ```bash
+   git clone https://github.com/your-username/pdf-drag-drop.git
+   cd pdf-drag-drop
+   ```
 
-- Drag & drop PDF upload interface
-- PDF-only file type validation
-- 5MB maximum file size
-- Visual success/error messages
-- Built with React + react-dropzone
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
----
+3. Start the development server:
+   ```bash
+   npm start
+   ```
 
-## 🧱 Project Structure
+### Vercel Deployment
+
+1. Push your code to GitHub.
+2. Go to [vercel.com](https://vercel.com), import the GitHub repo.
+3. Make sure the project root contains `package.json`.
+4. Set the build command to `npm run build` and output directory to `build`.
+5. Click deploy.
+
+## Folder Structure
 
 ```
-pdf-drag-drop/
-├── public/
-├── src/
-│   ├── App.js
-│   ├── PDFDropZone.js
-│   └── index.js
-├── package.json
-├── README.md
-└── .gitignore
+/public
+/src
+  ├── App.js
+  ├── index.js
+  ├── PDFDropZone.js
+  ├── MetadataForm.js
+  ├── styles.css
 ```
+
+## Notes
+
+- Ensure you only upload valid PDFs.
+- The upload progress is simulated for UI purposes (no actual backend connected).
+- You can hook the metadata to a backend via API or serverless function.
 
 ---
 
-## 🛠️ Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/pdf-drag-drop.git
-cd pdf-drag-drop
-```
-
-### 2. Install dependencies
-
-```bash
-npm install
-```
-
-### 3. Start the development server
-
-```bash
-npm start
-```
-
----
-
-## 🌐 Deployment
-
-This app can be deployed to Vercel easily:
-
-1. Push your code to GitHub
-2. Visit [https://vercel.com/import/git](https://vercel.com/import/git)
-3. Select your repository and deploy using default Create React App settings
-
----
-
-## 🙏 Credits
-
-Made with ❤️ using:
-- React
-- react-dropzone
-- Vercel
-
----
-
-## 📄 License
-
-MIT — free for personal and commercial use.
+Built with React.
