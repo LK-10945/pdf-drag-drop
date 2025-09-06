@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { motion } from 'framer motion';
 import { useDropzone } from 'react-dropzone';
 
 const DOC_TYPES = ["Transcript", "Resume", "Recommendation", "Personal Statement", "Other"];
@@ -60,16 +61,33 @@ export default function PDFDropZone() {
 
   return (
     <div>
-      <div {...getRootProps()} style={dropzoneStyles} aria-label="Upload PDF">
+       <div>
+      <motion.div
+        {...getRootProps()}
+        initial={{ backgroundColor: '#f9f9f9', borderColor: '#888' }}
+        animate={isDragActive
+          ? { backgroundColor: '#e0f7fa', borderColor: '#00acc1' }
+          : { backgroundColor: '#f9f9f9', borderColor: '#888' }}
+        transition={{ duration: 0.3 }}
+        style={dropzoneStyles}
+        aria-label="Upload PDF"
+      >
         <input {...getInputProps()} aria-label="File input" />
-        {isDragActive ? <p>Drop your PDF here...</p> : <p>Drag and drop a PDF file here, or click to select one</p>}
-      </div>
+        {isDragActive
+          ? <p>Drop your PDF here...</p>
+          : <p>Drag and drop a PDF file here, or click to select one</p>}
+      </motion.div>
 
       {file && !uploading && !success && (
         <div style={{ marginTop: '1rem' }}>
           <label>
             Document Type (required):<br />
-            <select value={docType} onChange={(e) => setDocType(e.target.value)} disabled={uploading} required>
+            <select
+              value={docType}
+              onChange={(e) => setDocType(e.target.value)}
+              disabled={uploading}
+              required
+            >
               <option value="">-- Select --</option>
               {DOC_TYPES.map((type) => (
                 <option key={type} value={type}>{type}</option>
@@ -105,12 +123,10 @@ export default function PDFDropZone() {
 }
 
 const dropzoneStyles = {
-  border: '2px dashed #888',
+  border: '2px dashed',
   padding: '40px',
   textAlign: 'center',
   borderRadius: '8px',
   cursor: 'pointer',
   marginTop: '2em',
-  backgroundColor: '#f9f9f9'
 };
-
