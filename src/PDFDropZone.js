@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { motion } from 'framer motion';
+import { motion } from 'framer-motion';
 import { useDropzone } from 'react-dropzone';
 
 const DOC_TYPES = ["Transcript", "Resume", "Recommendation", "Personal Statement", "Other"];
@@ -61,21 +61,20 @@ export default function PDFDropZone() {
 
   return (
     <div>
-       <div>
       <motion.div
         {...getRootProps()}
-        initial={{ backgroundColor: '#f9f9f9', borderColor: '#888' }}
+        initial={{ scale: 1, backgroundColor: '#f9f9f9', borderColor: '#888' }}
         animate={isDragActive
-          ? { backgroundColor: '#e0f7fa', borderColor: '#00acc1' }
-          : { backgroundColor: '#f9f9f9', borderColor: '#888' }}
+          ? { scale: 1.03, backgroundColor: '#e0f7fa', borderColor: '#00acc1' }
+          : { scale: 1, backgroundColor: '#f9f9f9', borderColor: '#888' }}
         transition={{ duration: 0.3 }}
         style={dropzoneStyles}
         aria-label="Upload PDF"
       >
         <input {...getInputProps()} aria-label="File input" />
         {isDragActive
-          ? <p>Drop your PDF here...</p>
-          : <p>Drag and drop a PDF file here, or click to select one</p>}
+          ? <p>📂 Drop your PDF here...</p>
+          : <p>📄 Drag and drop a PDF file here, or click to select one</p>}
       </motion.div>
 
       {file && !uploading && !success && (
@@ -129,4 +128,6 @@ const dropzoneStyles = {
   borderRadius: '8px',
   cursor: 'pointer',
   marginTop: '2em',
+  borderColor: '#888',
+  transition: 'all 0.3s ease'
 };
