@@ -1,19 +1,29 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}", // this includes all your component files
+    "./src/**/*.{js,jsx,ts,tsx}", // Ensures Tailwind scans your components
+    "./public/index.html",        // Optional: if you use any Tailwind in your HTML
   ],
   theme: {
     extend: {
       colors: {
-        // Customize your design system here if needed
-        background: 'hsl(0, 0%, 100%)',
-        foreground: 'hsl(222.2, 47.4%, 11.2%)',
-        primary: 'hsl(222.2, 83.2%, 53.3%)',
-        muted: 'hsl(210, 40%, 96%)',
-        border: 'hsl(214, 32%, 91%)',
+        primary: '#4f46e5',   // Indigo
+        secondary: '#9333ea', // Purple
+        accent: '#14b8a6',    // Teal
+        muted: '#f3f4f6',     // Light gray
+      },
+      animation: {
+        pulseFast: 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        pulse: {
+          '0%, 100%': { opacity: 1 },
+          '50%': { opacity: 0.5 },
+        },
       },
     },
   },
-  plugins: [],
-}
+  plugins: [
+    require('tailwindcss-animate'), // Optional: for framer-motion / transitions
+  ],
+};
