@@ -1,13 +1,12 @@
-import React from 'react';
-import PDFDropZone from './PDFDropZone';
+import PDFDropZone from './PDFDropZone'
 
 function App() {
   return (
-    <div className="App">
-      <h1>Class Submissions Page Upload</h1>
+    <main className="min-h-screen bg-gray-50 p-6">
+      <h1 className="text-3xl font-bold text-center mb-6">PDF Metadata Upload</h1>
       <PDFDropZone />
-    </div>
-  );
+    </main>
+  )
 }
 
-export default App;
+export default App
