@@ -1,12 +1,15 @@
-import PDFDropZone from './PDFDropZone'
+import { FileDropZone } from './PDFDropZone'
+import { Toaster } from './components/ui/sonner'
 
-function App() {
+export default function App() {
   return (
-    <main className="min-h-screen bg-gray-50 p-6">
-      <h1 className="text-3xl font-bold text-center mb-6">PDF Metadata Upload</h1>
-      <PDFDropZone />
-    </main>
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+      <main className="container mx-auto px-4 py-12">
+        <div className="max-w-7xl mx-auto">
+          <FileDropZone />
+        </div>
+      </main>
+      <Toaster />
+    </div>
   )
 }
-
-export default App
