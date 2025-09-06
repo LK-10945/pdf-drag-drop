@@ -1,51 +1,43 @@
 import React, { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { motion } from 'framer-motion'
+import { toast } from 'sonner'
 
 const DOC_TYPES = ["Transcript", "Resume", "Recommendation", "Personal Statement", "Other"]
 
-export default function PDFDropZone() {
+export function FileDropZone() {
   const [file, setFile] = useState(null)
   const [docType, setDocType] = useState("")
   const [notes, setNotes] = useState("")
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState(false)
   const [progress, setProgress] = useState(0)
   const [uploading, setUploading] = useState(false)
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
-    setError("")
-    setSuccess(false)
     if (rejectedFiles.length > 0 || !acceptedFiles[0]?.type.includes("pdf")) {
-      setFile(null)
-      setError("❌ Please upload a valid PDF file under 10MB.")
+      toast.error("Please upload a valid PDF under 10MB")
       return
     }
     setFile(acceptedFiles[0])
   }, [])
 
   const validateMeta = () => {
-    if (!docType) return "Please choose a document type."
+    if (!docType) return "Choose a document type."
     if (notes.length > 200) return "Notes must be 200 characters or fewer."
     return ""
   }
 
   const mockUpload = () => {
-    const metaErr = validateMeta()
-    if (metaErr) {
-      setError(metaErr)
-      return
-    }
-    setError("")
+    const err = validateMeta()
+    if (err) return toast.error(err)
     setUploading(true)
     setProgress(0)
     const id = setInterval(() => {
-      setProgress((p) => {
-        const next = Math.min(100, p + 8)
+      setProgress(p => {
+        const next = Math.min(100, p + 10)
         if (next === 100) {
           clearInterval(id)
           setUploading(false)
-          setSuccess(true)
+          toast.success(`${file.name} uploaded as "${docType}"`)
         }
         return next
       })
@@ -53,56 +45,47 @@ export default function PDFDropZone() {
   }
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    multiple: false,
+    onDrop, multiple: false,
     accept: { 'application/pdf': ['.pdf'] },
-    maxSize: 10 * 1024 * 1024,
+    maxSize: 10 * 1024 * 1024
   })
 
   return (
-    <div className="max-w-xl mx-auto">
-      <motion.div
-        {...getRootProps()}
-        initial={{ backgroundColor: '#f9f9f9' }}
-        animate={{
-          backgroundColor: isDragActive ? '#e0f2fe' : '#f9f9f9',
-          borderColor: isDragActive ? '#0ea5e9' : '#888'
-        }}
-        transition={{ duration: 0.3 }}
-        className="border-2 border-dashed p-6 rounded-md text-center cursor-pointer"
-      >
-        <input {...getInputProps()} />
-        <p>{isDragActive ? "Drop your PDF here..." : "Drag and drop a PDF file here, or click to select"}</p>
-      </motion.div>
+    <motion.div
+      {...getRootProps()}
+      initial={{ borderColor: '#ccc', backgroundColor: '#fff' }}
+      animate={isDragActive
+        ? { borderColor: '#06b6d4', backgroundColor: '#e0f7fa' }
+        : { borderColor: '#ccc', backgroundColor: '#fff' }}
+      transition={{ duration: 0.3 }}
+      className="border-2 border-dashed rounded-xl p-10 text-center cursor-pointer shadow-sm"
+    >
+      <input {...getInputProps()} />
+      <p>{isDragActive ? "Drop your PDF here..." : "Drag & drop or click to upload PDF"}</p>
 
-      {file && !uploading && !success && (
-        <div className="mt-4 space-y-3">
+      {file && !uploading && (
+        <div className="mt-6 text-left space-y-4">
           <div>
-            <label className="block font-semibold mb-1">Document Type:</label>
-            <select value={docType} onChange={(e) => setDocType(e.target.value)} className="w-full border px-2 py-1 rounded">
+            <label>Document Type:</label>
+            <select className="w-full border p-2 rounded" value={docType} onChange={e => setDocType(e.target.value)}>
               <option value="">-- Select --</option>
-              {DOC_TYPES.map(type => (
-                <option key={type} value={type}>{type}</option>
-              ))}
+              {DOC_TYPES.map(type => <option key={type} value={type}>{type}</option>)}
             </select>
           </div>
           <div>
-            <label className="block font-semibold mb-1">Notes (optional):</label>
-            <textarea value={notes} onChange={(e) => setNotes(e.target.value)} maxLength={200} className="w-full border px-2 py-1 rounded" />
+            <label>Notes:</label>
+            <textarea className="w-full border p-2 rounded" maxLength={200} value={notes} onChange={e => setNotes(e.target.value)} />
           </div>
-          <button onClick={mockUpload} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Submit</button>
+          <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={mockUpload}>Submit</button>
         </div>
       )}
 
       {uploading && (
         <div className="mt-4">
           <p>Uploading... {progress}%</p>
-          <progress value={progress} max="100" className="w-full" />
+          <progress max="100" value={progress} className="w-full" />
         </div>
       )}
-
-      {error && <p className="mt-2 text-red-600">{error}</p>}
-      {success && <p className="mt-2 text-green-600">✅ {file.name} uploaded as "{docType}"</p>}
-    </div>
+    </motion.div>
   )
 }
