@@ -1,2 +1,7 @@
-console.log("Supabase URL:", import.meta.env.VITE_SUPABASE_URL);
-console.log("Anon key exists:", Boolean(import.meta.env.VITE_SUPABASE_ANON_KEY));
+export default function App() {
+  return (
+    <div style={{ padding: 24, fontFamily: "system-ui, sans-serif" }}>
+      <h1>✅ App compiles</h1>
+    </div>
+  );
+}
