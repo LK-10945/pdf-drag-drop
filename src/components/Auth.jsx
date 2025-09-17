@@ -10,7 +10,7 @@ export default function Auth() {
     e.preventDefault();
     setBusy(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) alert("Login failed: " + error.message);
+    if (error) alert("❌ Login failed: " + error.message);
     setBusy(false);
   };
 
@@ -18,50 +18,40 @@ export default function Auth() {
     e.preventDefault();
     setBusy(true);
     const { error } = await supabase.auth.signUp({ email, password });
-    if (error) alert("Signup failed: " + error.message);
-    else alert("✅ Check your email to confirm your account.");
+    if (error) alert("❌ Signup failed: " + error.message);
+    else alert("✅ Check your email to confirm signup.");
     setBusy(false);
   };
 
   return (
-    <form className="space-y-4" onSubmit={login}>
-      <h2 className="text-xl font-semibold">Sign in or create an account</h2>
-
+    <form onSubmit={login} style={{ display: "grid", gap: 12, maxWidth: 300 }}>
+      <h2>Sign In or Sign Up</h2>
       <input
-        className="w-full p-2 border rounded"
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
+        style={{ padding: 8 }}
       />
-
       <input
-        className="w-full p-2 border rounded"
         type="password"
         placeholder="Password (min 6 chars)"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
+        style={{ padding: 8 }}
       />
-
-      <div className="flex gap-2">
-        <button
-          className="bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-70"
-          disabled={busy}
-          onClick={login}
-        >
-          {busy ? "Signing in..." : "Sign in"}
+      <div style={{ display: "flex", gap: 8 }}>
+        <button type="submit" disabled={busy} style={{ padding: "8px 12px" }}>
+          {busy ? "…" : "Sign In"}
         </button>
-
-        <button
-          className="bg-green-600 text-white px-4 py-2 rounded disabled:opacity-70"
-          disabled={busy}
-          onClick={signup}
-        >
-          {busy ? "Creating..." : "Sign up"}
+        <button onClick={signup} disabled={busy} style={{ padding: "8px 12px" }}>
+          {busy ? "…" : "Sign Up"}
         </button>
       </div>
     </form>
   );
 }
+
+
