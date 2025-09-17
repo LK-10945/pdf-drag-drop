@@ -19,16 +19,20 @@ export default function App() {
   }, []);
 
   return (
-    <div style={{ padding: 24, fontFamily: "system-ui, sans-serif" }}>
-      <h1>📄 Secure PDF Uploader</h1>
-      {!session ? (
-        <Auth />
-      ) : (
-        <>
-          <p>✅ Logged in as {session.user.email}</p>
-          <LogoutButton />
-        </>
-      )}
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white shadow-lg rounded-xl p-8 max-w-md w-full text-center">
+        <h1 className="text-2xl font-bold mb-4">📄 Secure PDF Uploader</h1>
+        {!session ? (
+          <Auth />
+        ) : (
+          <>
+            <p className="text-gray-700 mb-4">
+              ✅ Logged in as <span className="font-semibold">{session.user.email}</span>
+            </p>
+            <LogoutButton />
+          </>
+        )}
+      </div>
     </div>
   );
 }
