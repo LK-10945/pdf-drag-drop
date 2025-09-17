@@ -24,15 +24,14 @@ export default function Auth() {
   };
 
   return (
-    <form onSubmit={login} style={{ display: "grid", gap: 12, maxWidth: 300 }}>
-      <h2>Sign In or Sign Up</h2>
+    <form onSubmit={login} className="flex flex-col gap-4">
       <input
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-        style={{ padding: 8 }}
+        className="border rounded px-3 py-2"
       />
       <input
         type="password"
@@ -40,18 +39,24 @@ export default function Auth() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
-        style={{ padding: 8 }}
+        className="border rounded px-3 py-2"
       />
-      <div style={{ display: "flex", gap: 8 }}>
-        <button type="submit" disabled={busy} style={{ padding: "8px 12px" }}>
+      <div className="flex gap-2 justify-center">
+        <button
+          type="submit"
+          disabled={busy}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
           {busy ? "…" : "Sign In"}
         </button>
-        <button onClick={signup} disabled={busy} style={{ padding: "8px 12px" }}>
+        <button
+          onClick={signup}
+          disabled={busy}
+          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+        >
           {busy ? "…" : "Sign Up"}
         </button>
       </div>
     </form>
   );
 }
-
-
