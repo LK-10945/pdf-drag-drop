@@ -1,0 +1,36 @@
+// api/upload-guard.js
+// Vercel serverless function: size/type checks + simple rate limit
+const WINDOW_MS = 60_000;   // 1 minute
+const MAX_HITS = 10;        // 10 uploads/min/IP
+const ipHits = new Map();   // in-memory (fine for demo/dev)
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  const ip = (req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '').toString();
+  const now = Date.now();
+  const list = (ipHits.get(ip) || []).filter(ts => now - ts < WINDOW_MS);
+  list.push(now);
+  ipHits.set(ip, list);
+  if (list.length > MAX_HITS) return res.status(429).json({ error: 'Too many uploads. Try again soon.' });
+
+  const body = await readJson(req).catch(() => null);
+  if (!body) return res.status(400).json({ error: 'Malformed request.' });
+
+  const { name, size, type } = body;
+  if (type !== 'application/pdf') return res.status(400).json({ error: 'Only PDF files allowed.' });
+  if (typeof size !== 'number' || size <= 0) return res.status(400).json({ error: 'Invalid file size.' });
+  if (size > 10 * 1024 * 1024) return res.status(413).json({ error: 'File exceeds 10MB limit.' });
+  if (!name || typeof name !== 'string' || name.length > 260) return res.status(400).json({ error: 'Invalid filename.' });
+
+  return res.status(200).json({ ok: true });
+}
+
+function readJson(req) {
+  return new Promise((resolve, reject) => {
+    let body = '';
+    req.on('data', c => (body += c));
+    req.on('end', () => { try { resolve(JSON.parse(body || '{}')); } catch (e) { reject(e); } });
+    req.on('error', reject);
+  });
+}
