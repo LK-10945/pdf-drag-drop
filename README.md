@@ -1,12 +1,65 @@
-# React + Vite
+# 📄 PDF Drag & Drop App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + Vite application that lets authenticated users upload multiple PDF files (up to 10MB each) into Supabase storage, with Row Level Security (RLS) enabled.
 
-Currently, two official plugins are available:
+## 🚀 Features
+- React + Vite frontend with TailwindCSS  
+- Supabase Auth (email + password sign-in and sign-up)  
+- Supabase Storage bucket for PDFs  
+- Row Level Security (RLS) policies for secure uploads  
+- Drag & Drop Upload (via `react-dropzone`)  
+- File validation (only PDF, max 10MB)  
+- Upload status messages (loading, success, error)  
+- Logout button to end session securely  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🗂 Project Structure
+src/
+App.jsx # Root component (auth + layout)
+main.jsx # React entry point
+supabase.js # Supabase client setup
+index.css # Tailwind base styles
+components/
+Auth.jsx # Login / Signup form
+LogoutButton.jsx # Logout action
+PDFDropZone.jsx # Drag & drop PDF uploader
 
-## Expanding the ESLint configuration
+## ⚙️ Run Locally
+1. Clone the repo and install dependencies:
+```bash
+git clone https://github.com/YOUR-USERNAME/pdf-drag-drop-advsec.git
+cd pdf-drag-drop-advsec
+npm install
+Start the development server:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Copy code
+npm run dev
+Open http://localhost:++++++ in your browser.
+
+🔑 Environment Variables
+You need to set the following environment variables (either in a .env file for local dev or in Vercel project settings for deployment):
+
+Copy code
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+📦 Deployment
+Hosted on Vercel
+
+Build command: npm run build
+
+Output directory: dist
+
+Environment variables configured in Vercel project settings:
+
+VITE_SUPABASE_URL
+
+VITE_SUPABASE_ANON_KEY
+
+✅ Next Steps
+
+Add rate limiting for uploads
+
+Improve UI polish (progress bar, file list, previews)
+
+Add error boundary and logging for Supabase requests
+
+
